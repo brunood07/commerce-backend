@@ -4,3 +4,12 @@
 [submodule "payments-ms"]
 	path = payments-ms
 	url = https://github.com/brunood07/payments-ms.git
+[submodule "shipping-ms"]
+	path = shipping-ms
+	url = https://github.com/brunood07/shipping-ms
+[submodule "products-ms"]
+	path = products-ms
+	url = https://github.com/brunood07/products-ms.git
+[submodule "clients-ms"]
+	path = clients-ms
+	url = https://github.com/brunood07/clients-ms.git
