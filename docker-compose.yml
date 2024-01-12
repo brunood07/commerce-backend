@@ -1,0 +1,135 @@
+version: '3'
+
+services:
+  order:
+    container_name: orders-ms
+    image: orders-app
+    build:
+      context: ./orders-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-cloud-network
+    volumes:
+      - .:/orders-ms/usr/app
+    links:
+      - order-postgres
+    depends_on:
+      - order-postgres
+  payment:
+    container_name: payments-ms
+    image: payments-app
+    build:
+      context: ./payments-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - spring-cloud-network
+    links:
+      - payment-postgres
+    depends_on:
+      - payment-postgres
+  product:
+    container_name: products-ms
+    image: products-app
+    build:
+      context: ./products-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - spring-cloud-network
+    links:
+      - product-postgres
+    depends_on:
+      - product-postgres
+  shipping:
+    container_name: shipping-ms
+    image: shipping-app
+    build:
+      context: ./shipping-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - spring-cloud-network
+  client:
+    container_name: clients-ms
+    image: clients-app
+    build:
+      context: ./clients-ms
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    networks:
+      - spring-cloud-network
+    links:
+      - client-postgres
+    depends_on:
+      - client-postgres
+
+  rabbitmq:
+    image: rabbitmq:3.10-management
+    container_name: ecomm-rabbit-mq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./dados:/var/lib/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=ecomm-user
+      - RABBITMQ_DEFAULT_PASS=start-password
+    networks:
+      - spring-cloud-network
+  
+  order-postgres:
+    container_name: orders_db
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=orders-db
+    networks:
+      - spring-cloud-network
+  payment-postgres:
+    container_name: payments_db
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=payments-db
+    networks:
+      - spring-cloud-network
+  product-postgres:
+    container_name: products_db
+    image: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=products-db
+    networks:
+      - spring-cloud-network
+  client-postgres:
+    container_name: clients_db
+    image: postgres
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=clients-db
+    networks:
+      - spring-cloud-network
+
+networks:
+  spring-cloud-network:
+    driver: bridge
