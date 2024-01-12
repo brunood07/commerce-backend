@@ -1,0 +1,329 @@
+{
+  "info": {
+    "name": "ecomm",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "clients",
+      "item": [
+        {
+          "name": "authenticate client",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8084/api/v1/client/auth",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"brunood07@gmail.com\",\n  \"password\": \"Teste123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "client profile",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJqYXZhZ2FzIiwiZXhwIjoxNzA1MDU5NDUxLCJzdWIiOiIxIiwicm9sZXMiOlsiQ0FORElEQVRFIl19.1U45U4g3hJWc6pWrf6nuKtwNAO-PQdJlJ93ccBDyTmE",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "url": "http://localhost:8084/api/v1/client/me"
+          }
+        },
+        {
+          "name": "create client",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8084/api/v1/client",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Bruno\",\n  \"lastName\": \"Domingues\",\n  \"document\": \"11111111111\",\n  \"email\": \"brunood07@gmail.com\",\n  \"phoneNumber\": \"13981626268\",\n  \"password\": \"Teste123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "update client",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJqYXZhZ2FzIiwiZXhwIjoxNzA1MDE0ODMzLCJzdWIiOiIzNCIsInJvbGVzIjpbIkNBTkRJREFURSJdfQ.pJ8dpLPHus90iMJcHqekC50fi1uWOD3lW9-RopI9ykA",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "url": "http://localhost:8084/api/v1/client",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"teste\",\n  \"lastName\": \"teste 2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "payments",
+      "item": [
+        {
+          "name": "get payment by order id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8081/api/v1/payments/1"
+          }
+        },
+        {
+          "name": "update payment status",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "http://localhost:8081/api/v1/payments/update/1?status=SETTLED"
+          }
+        }
+      ]
+    },
+    {
+      "name": "orders",
+      "item": [
+        {
+          "name": "create order",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "url": "http://localhost:8080/api/v1/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order\": {\n    \"clientId\": 1\n  },\n  \"paymentInfo\": {\n    \"paymentType\": \"pix\",\n    \"cardInfo\": {\n      \"cardNumber\": null,\n      \"cardCvv\": null,\n      \"cardName\": null,\n      \"cardExpirationDate\": null\n    },\n    \"clientDocument\": \"11111111111\",\n    \"installments\": 1\n  },\n  \"products\": [\n    {\n      \"quantity\": 1,\n      \"price\": 500,\n      \"idProduct\": 1\n    },\n    {\n      \"quantity\": 1,\n      \"price\": 450,\n      \"idProduct\": 5\n    }\n  ],\n  \"priceInfo\": {\n    \"discount\": 0,\n    \"subTotal\": 950,\n    \"shipping\": 50,\n    \"tax\": 0\n  },\n  \"addressInfo\": {\n    \"street\": \"Rua Teste\",\n    \"number\": \"13\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"neighboorhood\": \"Bairro Teste\",\n    \"postalCode\": \"00000000\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "find by client id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/api/v1/orders/client/1"
+          }
+        },
+        {
+          "name": "get order by id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8080/api/v1/orders/3"
+          }
+        },
+        {
+          "name": "update shipping status",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "http://localhost:8080/api/v1/shipping/update/1?status=FINISHED"
+          }
+        },
+        {
+          "name": "healthcheck",
+          "item": [
+            {
+              "name": "actuator",
+              "event": [],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "http://localhost:8080/actuator"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "products",
+      "item": [
+        {
+          "name": "create product",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"Test Product\",\n  \"salePrice\": 10,\n  \"listPrice\": 15,\n  \"category\": \"Test category\",\n  \"width\": 2,\n  \"weight\": 1,\n  \"height\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "delete product image",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product/images/1?filename=0bdc2c44-a357-4e8d-857c-b80f5d07dac6"
+          }
+        },
+        {
+          "name": "delete product",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product/1"
+          }
+        },
+        {
+          "name": "download image",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product/images/f0e04cbc-b346-483c-95f6-22ce5fc77f34"
+          }
+        },
+        {
+          "name": "get product by id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product/2"
+          }
+        },
+        {
+          "name": "get products",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product?ids=2,3,4,5"
+          }
+        },
+        {
+          "name": "update product info",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product/2",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"tecnology\",\n  \"salePrice\": 5,\n  \"listPrice\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "upload image",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/product/images",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "C:\\users\\bruno\\downloads\\download.png",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "productId",
+                  "value": "2",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "shipping",
+      "item": [
+        {
+          "name": "calculate freight",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/freight/calculate",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"products\": [\n    {\n      \"displayName\": \"Test 1\",\n      \"value\": 1000.0,\n      \"dimension\": {\n        \"height\": 10.0,\n        \"width\": 5.0,\n        \"weight\": 10\n      }\n    },\n    {\n      \"displayName\": \"Test 2\",\n      \"value\": 200.0,\n      \"dimension\": {\n        \"height\": 2.0,\n        \"width\": 1.0,\n        \"weight\": 0.5\n      }\n    },\n    {\n      \"displayName\": \"Test 2\",\n      \"value\": 50.0,\n      \"dimension\": {\n        \"height\": 1.0,\n        \"width\": 1.0,\n        \"weight\": 1\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "update shipping status",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "http://localhost:8083/api/v1/shipping/update/1?status=FINISHED"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": []
+}

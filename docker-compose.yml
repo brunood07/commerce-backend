@@ -9,6 +9,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    expose:
+      - "8080"
     networks:
       - spring-cloud-network
     volumes:
