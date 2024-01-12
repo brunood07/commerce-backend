@@ -10,14 +10,19 @@ While i didnt founded any way to make it run with the docker commands we will ne
 
 - cd ./orders-ms
 - mvn clean package -DskipTests
+- cd ..
 - cd ./payments-ms
 - mvn clean package -DskipTests
+- cd ..
 - cd ./clients-ms
 - mvn clean package -DskipTests
+- cd ..
 - cd ./products-ms
 - mvn clean package -DskipTests
+- cd ..
 - cd ./shipping-ms
 - mvn clean package -DskipTests
+- cd ..
 
 This command will package the java application generation the /target folder and creating the jar of the application.
 After doing this we will need to move back to root folder of the submodule.
