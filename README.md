@@ -1,6 +1,15 @@
 # ECOMMERCE BACKEND
 
-This project was created to enforce knowledge about Java, Spring, Microservices and RabbitMQ.
+This project was created for study purposes and some points might not look exactly how a ecommerce really works.
+The project uses a microservice architecture and there is 5 microservices:
+- Orders
+- Clients
+- Products
+- Payments
+- Shipping
+
+Each service has its own database, and there is a rabbitmq server connecting orders and payments microservices.
+The products microservice uses a cloudflare bucket to save the product images, using the aws s3 sdk to make the connection.
 
 # HOW TO RUN
 
